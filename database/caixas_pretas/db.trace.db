@@ -1,0 +1,137 @@
+11-06 23:20:01 jdbc[5]: exception
+org.h2.jdbc.JdbcSQLException: Constraint "UK_LMGS52T6HJ5NGRD63L4QXOA9G" not found; SQL statement:
+
+    alter table Artist_Song 
+        drop constraint UK_lmgs52t6hj5ngrd63l4qxoa9g [90057-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.command.ddl.AlterTableDropConstraint.update(AlterTableDropConstraint.java:41)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:79)
+	at org.h2.command.Command.executeUpdate(Command.java:235)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:127)
+	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:112)
+	at com.jolbox.bonecp.StatementHandle.executeUpdate(StatementHandle.java:497)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:227)
+	at org.hibernate.tool.hbm2ddl.SchemaUpdate.execute(SchemaUpdate.java:178)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:505)
+	at org.hibernate.cfg.Configuration.buildSessionFactory(Configuration.java:1769)
+	at org.hibernate.ejb.EntityManagerFactoryImpl.<init>(EntityManagerFactoryImpl.java:96)
+	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:914)
+	at org.hibernate.ejb.Ejb3Configuration.buildEntityManagerFactory(Ejb3Configuration.java:899)
+	at org.hibernate.ejb.HibernatePersistence.createEntityManagerFactory(HibernatePersistence.java:59)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:63)
+	at javax.persistence.Persistence.createEntityManagerFactory(Persistence.java:47)
+	at play.db.jpa.JPAPlugin.onStart(JPAPlugin.java:35)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:88)
+	at play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:88)
+	at scala.collection.immutable.List.foreach(List.scala:318)
+	at play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:88)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:88)
+	at play.api.Play$$anonfun$start$1.apply(Play.scala:88)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+	at play.api.Play$.start(Play.scala:87)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:139)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1$$anonfun$1.apply(ApplicationProvider.scala:112)
+	at scala.Option.map(Option.scala:145)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:112)
+	at play.core.ReloadableApplication$$anonfun$get$1$$anonfun$apply$1.apply(ApplicationProvider.scala:110)
+	at scala.util.Success.flatMap(Try.scala:200)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:102)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at scala.concurrent.forkjoin.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1361)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+11-07 06:04:54 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Timeout trying to lock table "SIMILARITY"; SQL statement:
+select similars0_.TARGET as TARGET1_1_1_, similars0_.SIMILAR as SIMILAR2_3_1_, artist1_.id as id1_1_0_, artist1_.msdId as msdId2_1_0_, artist1_.name as name3_1_0_ from SIMILARITY similars0_ inner join Artist artist1_ on similars0_.SIMILAR=artist1_.id where similars0_.TARGET=? [50200-172]
+11-12 20:01:43 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT ARTIST0_.ID AS COL_0_0_, ARTIST0_.NAME AS COL_1_0_, ARTIST0_.MSDID AS COL_2_0_ FROM ARTIST ARTIST0_ LEFT OUTER JOIN ARTIST_TAG TAGS1_ ON ARTIST0_.ID=TAGS1_.ARTIST LEFT OUTER JOIN TAG TAG2_ ON TAGS1_.TAG=TAG2_.ID CROSS JOIN ARTIST_TAG TAGS4_, TAG TAG5_ WHERE ARTIST0_.ID=TAGS4_.ARTIST AND TAGS4_.TAG=TAG5_.ID AND ((SELECT TAG3_.ID FROM TAG TAG3_ WHERE TAG3_.TAGNAME=?) IN (.[*])) "; expected "NOT, EXISTS, SELECT, FROM"; SQL statement:
+select artist0_.id as col_0_0_, artist0_.name as col_1_0_, artist0_.msdId as col_2_0_ from Artist artist0_ left outer join ARTIST_TAG tags1_ on artist0_.id=tags1_.ARTIST left outer join Tag tag2_ on tags1_.TAG=tag2_.id cross join ARTIST_TAG tags4_, Tag tag5_ where artist0_.id=tags4_.ARTIST and tags4_.TAG=tag5_.id and ((select tag3_.id from Tag tag3_ where tag3_.tagName=?) in (.)) [42001-172]
+11-12 20:05:01 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT ARTIST0_.ID AS COL_0_0_, ARTIST0_.NAME AS COL_1_0_, ARTIST0_.MSDID AS COL_2_0_ FROM ARTIST ARTIST0_ LEFT OUTER JOIN ARTIST_TAG TAGS1_ ON ARTIST0_.ID=TAGS1_.ARTIST LEFT OUTER JOIN TAG TAG2_ ON TAGS1_.TAG=TAG2_.ID CROSS JOIN ARTIST_TAG TAGS4_, TAG TAG5_ WHERE ARTIST0_.ID=TAGS4_.ARTIST AND TAGS4_.TAG=TAG5_.ID AND ((SELECT TAG3_.ID FROM TAG TAG3_ WHERE TAG3_.TAGNAME=?) IN (.[*])) "; expected "NOT, EXISTS, SELECT, FROM"; SQL statement:
+select artist0_.id as col_0_0_, artist0_.name as col_1_0_, artist0_.msdId as col_2_0_ from Artist artist0_ left outer join ARTIST_TAG tags1_ on artist0_.id=tags1_.ARTIST left outer join Tag tag2_ on tags1_.TAG=tag2_.id cross join ARTIST_TAG tags4_, Tag tag5_ where artist0_.id=tags4_.ARTIST and tags4_.TAG=tag5_.id and ((select tag3_.id from Tag tag3_ where tag3_.tagName=?) in (.)) [42001-172]
+11-12 20:08:00 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT ARTIST0_.ID AS COL_0_0_, ARTIST0_.NAME AS COL_1_0_, ARTIST0_.MSDID AS COL_2_0_ FROM ARTIST ARTIST0_ LEFT OUTER JOIN ARTIST_TAG TAGS1_ ON ARTIST0_.ID=TAGS1_.ARTIST LEFT OUTER JOIN TAG TAG2_ ON TAGS1_.TAG=TAG2_.ID CROSS JOIN ARTIST_TAG TAGS4_, TAG TAG5_ WHERE ARTIST0_.ID=TAGS4_.ARTIST AND TAGS4_.TAG=TAG5_.ID AND ((SELECT TAG3_.ID FROM TAG TAG3_ WHERE TAG3_.TAGNAME=?) IN (.[*])) "; expected "NOT, EXISTS, SELECT, FROM"; SQL statement:
+select artist0_.id as col_0_0_, artist0_.name as col_1_0_, artist0_.msdId as col_2_0_ from Artist artist0_ left outer join ARTIST_TAG tags1_ on artist0_.id=tags1_.ARTIST left outer join Tag tag2_ on tags1_.TAG=tag2_.id cross join ARTIST_TAG tags4_, Tag tag5_ where artist0_.id=tags4_.ARTIST and tags4_.TAG=tag5_.id and ((select tag3_.id from Tag tag3_ where tag3_.tagName=?) in (.)) [42001-172]
+11-12 22:31:55 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT ARTIST0_.ID AS COL_0_0_, ARTIST0_.NAME AS COL_1_0_, ARTIST0_.MSDID AS COL_2_0_ FROM ARTIST ARTIST0_ LEFT OUTER JOIN ARTIST_TAG TAGS1_ ON ARTIST0_.ID=TAGS1_.ARTIST LEFT OUTER JOIN TAG TAG2_ ON TAGS1_.TAG=TAG2_.ID CROSS JOIN ARTIST_TAG TAGS4_, TAG TAG5_ WHERE ARTIST0_.ID=TAGS4_.ARTIST AND TAGS4_.TAG=TAG5_.ID AND ((SELECT TAG3_.ID FROM TAG TAG3_ WHERE TAG3_.TAGNAME=?) IN (.[*])) "; expected "NOT, EXISTS, SELECT, FROM"; SQL statement:
+select artist0_.id as col_0_0_, artist0_.name as col_1_0_, artist0_.msdId as col_2_0_ from Artist artist0_ left outer join ARTIST_TAG tags1_ on artist0_.id=tags1_.ARTIST left outer join Tag tag2_ on tags1_.TAG=tag2_.id cross join ARTIST_TAG tags4_, Tag tag5_ where artist0_.id=tags4_.ARTIST and tags4_.TAG=tag5_.id and ((select tag3_.id from Tag tag3_ where tag3_.tagName=?) in (.)) [42001-172]
+11-12 22:34:48 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT ARTIST0_.ID AS COL_0_0_, ARTIST0_.NAME AS COL_1_0_, ARTIST0_.MSDID AS COL_2_0_ FROM ARTIST ARTIST0_ LEFT OUTER JOIN ARTIST_TAG TAGS1_ ON ARTIST0_.ID=TAGS1_.ARTIST LEFT OUTER JOIN TAG TAG2_ ON TAGS1_.TAG=TAG2_.ID CROSS JOIN ARTIST_TAG TAGS4_, TAG TAG5_ WHERE ARTIST0_.ID=TAGS4_.ARTIST AND TAGS4_.TAG=TAG5_.ID AND ((SELECT TAG3_.ID FROM TAG TAG3_ WHERE TAG3_.TAGNAME=?) IN (.[*])) "; expected "NOT, EXISTS, SELECT, FROM"; SQL statement:
+select artist0_.id as col_0_0_, artist0_.name as col_1_0_, artist0_.msdId as col_2_0_ from Artist artist0_ left outer join ARTIST_TAG tags1_ on artist0_.id=tags1_.ARTIST left outer join Tag tag2_ on tags1_.TAG=tag2_.id cross join ARTIST_TAG tags4_, Tag tag5_ where artist0_.id=tags4_.ARTIST and tags4_.TAG=tag5_.id and ((select tag3_.id from Tag tag3_ where tag3_.tagName=?) in (.)) [42001-172]
+11-12 22:35:29 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT ARTIST0_.ID AS COL_0_0_, ARTIST0_.NAME AS COL_1_0_, ARTIST0_.MSDID AS COL_2_0_ FROM ARTIST ARTIST0_ LEFT OUTER JOIN ARTIST_TAG TAGS1_ ON ARTIST0_.ID=TAGS1_.ARTIST LEFT OUTER JOIN TAG TAG2_ ON TAGS1_.TAG=TAG2_.ID CROSS JOIN ARTIST_TAG TAGS4_, TAG TAG5_ WHERE ARTIST0_.ID=TAGS4_.ARTIST AND TAGS4_.TAG=TAG5_.ID AND ((SELECT TAG3_.ID FROM TAG TAG3_ WHERE TAG3_.TAGNAME=?) IN (.[*])) "; expected "NOT, EXISTS, SELECT, FROM"; SQL statement:
+select artist0_.id as col_0_0_, artist0_.name as col_1_0_, artist0_.msdId as col_2_0_ from Artist artist0_ left outer join ARTIST_TAG tags1_ on artist0_.id=tags1_.ARTIST left outer join Tag tag2_ on tags1_.TAG=tag2_.id cross join ARTIST_TAG tags4_, Tag tag5_ where artist0_.id=tags4_.ARTIST and tags4_.TAG=tag5_.id and ((select tag3_.id from Tag tag3_ where tag3_.tagName=?) in (.)) [42001-172]
+11-12 22:41:27 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT ARTIST0_.ID AS COL_0_0_, ARTIST0_.NAME AS COL_1_0_, ARTIST0_.MSDID AS COL_2_0_ FROM ARTIST ARTIST0_ INNER JOIN ARTIST_TAG TAGS1_ ON ARTIST0_.ID=TAGS1_.ARTIST INNER JOIN TAG TAG2_ ON TAGS1_.TAG=TAG2_.ID CROSS JOIN ARTIST_TAG TAGS4_, TAG TAG5_ WHERE ARTIST0_.ID=TAGS4_.ARTIST AND TAGS4_.TAG=TAG5_.ID AND ((SELECT TAG3_.ID FROM TAG TAG3_ WHERE TAG3_.TAGNAME=?) IN (.[*])) "; expected "NOT, EXISTS, SELECT, FROM"; SQL statement:
+select artist0_.id as col_0_0_, artist0_.name as col_1_0_, artist0_.msdId as col_2_0_ from Artist artist0_ inner join ARTIST_TAG tags1_ on artist0_.id=tags1_.ARTIST inner join Tag tag2_ on tags1_.TAG=tag2_.id cross join ARTIST_TAG tags4_, Tag tag5_ where artist0_.id=tags4_.ARTIST and tags4_.TAG=tag5_.id and ((select tag3_.id from Tag tag3_ where tag3_.tagName=?) in (.)) [42001-172]
+11-12 22:48:46 jdbc[2]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT ARTIST0_.ID AS COL_0_0_, ARTIST0_.NAME AS COL_1_0_, ARTIST0_.MSDID AS COL_2_0_ FROM ARTIST ARTIST0_ INNER JOIN ARTIST_TAG TAGS1_ ON ARTIST0_.ID=TAGS1_.ARTIST INNER JOIN TAG TAG2_ ON TAGS1_.TAG=TAG2_.ID CROSS JOIN ARTIST_TAG TAGS3_, TAG TAG4_ WHERE ARTIST0_.ID=TAGS3_.ARTIST AND TAGS3_.TAG=TAG4_.ID AND (? IN (.[*])) "; expected "NOT, EXISTS, SELECT, FROM"; SQL statement:
+select artist0_.id as col_0_0_, artist0_.name as col_1_0_, artist0_.msdId as col_2_0_ from Artist artist0_ inner join ARTIST_TAG tags1_ on artist0_.id=tags1_.ARTIST inner join Tag tag2_ on tags1_.TAG=tag2_.id cross join ARTIST_TAG tags3_, Tag tag4_ where artist0_.id=tags3_.ARTIST and tags3_.TAG=tag4_.id and (? in (.)) [42001-172]
+11-12 22:52:09 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Syntax error in SQL statement "SELECT ARTIST0_.ID AS COL_0_0_, ARTIST0_.NAME AS COL_1_0_, ARTIST0_.MSDID AS COL_2_0_ FROM ARTIST ARTIST0_ INNER JOIN ARTIST_TAG TAGS1_ ON ARTIST0_.ID=TAGS1_.ARTIST INNER JOIN TAG TAG2_ ON TAGS1_.TAG=TAG2_.ID CROSS JOIN ARTIST_TAG TAGS3_, TAG TAG4_ WHERE ARTIST0_.ID=TAGS3_.ARTIST AND TAGS3_.TAG=TAG4_.ID AND (? IN (.[*])) "; expected "NOT, EXISTS, SELECT, FROM"; SQL statement:
+select artist0_.id as col_0_0_, artist0_.name as col_1_0_, artist0_.msdId as col_2_0_ from Artist artist0_ inner join ARTIST_TAG tags1_ on artist0_.id=tags1_.ARTIST inner join Tag tag2_ on tags1_.TAG=tag2_.id cross join ARTIST_TAG tags3_, Tag tag4_ where artist0_.id=tags3_.ARTIST and tags3_.TAG=tag4_.id and (? in (.)) [42001-172]
+11-14 22:37:27 jdbc[6]: exception
+org.h2.jdbc.JdbcSQLException: Column "SIMILARITY0_.ID" not found; SQL statement:
+select similarity0_.id as id1_3_, similarity0_.similar as similar2_3_, similarity0_.target as target3_3_ from Similarity similarity0_ [42122-172]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:329)
+	at org.h2.message.DbException.get(DbException.java:169)
+	at org.h2.message.DbException.get(DbException.java:146)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:144)
+	at org.h2.expression.Alias.optimize(Alias.java:52)
+	at org.h2.command.dml.Select.prepare(Select.java:808)
+	at org.h2.command.Parser.prepareCommand(Parser.java:219)
+	at org.h2.engine.Session.prepareLocal(Session.java:425)
+	at org.h2.engine.Session.prepareCommand(Session.java:374)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1138)
+	at org.h2.jdbc.JdbcPreparedStatement.<init>(JdbcPreparedStatement.java:70)
+	at org.h2.jdbc.JdbcConnection.prepareStatement(JdbcConnection.java:267)
+	at com.jolbox.bonecp.ConnectionHandle.prepareStatement(ConnectionHandle.java:1024)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$5.doPrepare(StatementPreparerImpl.java:161)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl$StatementPreparationTemplate.prepareStatement(StatementPreparerImpl.java:182)
+	at org.hibernate.engine.jdbc.internal.StatementPreparerImpl.prepareQueryStatement(StatementPreparerImpl.java:159)
+	at org.hibernate.loader.Loader.prepareQueryStatement(Loader.java:1859)
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:1836)
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:1816)
+	at org.hibernate.loader.Loader.doQuery(Loader.java:900)
+	at org.hibernate.loader.Loader.doQueryAndInitializeNonLazyCollections(Loader.java:342)
+	at org.hibernate.loader.Loader.doList(Loader.java:2526)
+	at org.hibernate.loader.Loader.doList(Loader.java:2512)
+	at org.hibernate.loader.Loader.listIgnoreQueryCache(Loader.java:2342)
+	at org.hibernate.loader.Loader.list(Loader.java:2337)
+	at org.hibernate.loader.hql.QueryLoader.list(QueryLoader.java:495)
+	at org.hibernate.hql.internal.ast.QueryTranslatorImpl.list(QueryTranslatorImpl.java:356)
+	at org.hibernate.engine.query.spi.HQLQueryPlan.performList(HQLQueryPlan.java:195)
+	at org.hibernate.internal.SessionImpl.list(SessionImpl.java:1269)
+	at org.hibernate.internal.QueryImpl.list(QueryImpl.java:101)
+	at org.hibernate.ejb.QueryImpl.getResultList(QueryImpl.java:266)
+	at dao.ArtistDao.similars(ArtistDao.java:42)
+	at controllers.Application.similars(Application.java:84)
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:173)
+	at Routes$$anonfun$routes$1$$anonfun$applyOrElse$7$$anonfun$apply$7.apply(routes_routing.scala:173)
+	at play.core.Router$HandlerInvoker$$anon$7$$anon$2.invocation(Router.scala:183)
+	at play.core.Router$Routes$$anon$1.invocation(Router.scala:377)
+	at play.core.j.JavaAction$$anon$1.call(JavaAction.scala:56)
+	at play.db.jpa.TransactionalAction$1.apply(TransactionalAction.java:20)
+	at play.db.jpa.TransactionalAction$1.apply(TransactionalAction.java:18)
+	at play.db.jpa.JPA.withTransactionAsync(JPA.java:177)
+	at play.db.jpa.TransactionalAction.call(TransactionalAction.java:15)
+	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:91)
+	at play.core.j.JavaAction$$anon$3.apply(JavaAction.scala:90)
+	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82)
+	at play.core.j.FPromiseHelper$$anonfun$flatMap$1.apply(FPromiseHelper.scala:82)
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:251)
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32)
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:37)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:42)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:386)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
