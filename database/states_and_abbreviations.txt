@@ -1,3 +1,12 @@
+Alabama - AL
+Alaska - AK
+Arizona - AZ
+Arkansas - AR
+California - CA
+Colorado - CO
+Connecticut - CT
+Delaware - DE
+Florida - FL
 Georgia - GA
 Hawaii - HI
 Idaho - ID
@@ -40,10 +49,3 @@ West Virginia - WV
 Wisconsin - WI
 Wyoming - WY
 
->>> a = open('states_and_abbreviations.txt', 'r')
->>> b = a.readlines()
->>> dic = {}
->>> for line in b:
-...     list = line.split(' - ')
-...     dic[list[0]]=list[1]
-...     print dic[list[0]]

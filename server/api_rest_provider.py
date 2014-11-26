@@ -50,8 +50,8 @@ def tags_states():
 @app.route('/main_tag')
 def main_tag():
     response = api_rest_data.get_state_main_tag()
-   # response = make_response(response)
-   # response.headers['Access-Control-Allow-Origin'] = "*"
+    response = make_response(response)
+    response.headers['Access-Control-Allow-Origin'] = "*"
     return response
 
 
