@@ -47,12 +47,20 @@ def tags_states():
     response.headers['Access-Control-Allow-Origin'] = "*"
     return response
 
-@app.route('/main_tag')
+@app.route('/maintag')
 def main_tag():
     response = api_rest_data.get_state_main_tag()
     response = make_response(response)
     response.headers['Access-Control-Allow-Origin'] = "*"
     return response
+
+@app.route('/timeseries')
+def timeseries():
+    response = api_rest_data.timeseries()
+    response = make_response(response)
+    response.headers['Access-Control-Allow-Origin'] = "*"
+    return response
+
 
 
 if __name__ == '__main__':

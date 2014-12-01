@@ -40,7 +40,6 @@ def tags_by_state(state):
         for linha in artist_lines:
             if(linha.split(",")[0] in artista_do_state):
                 ocorrencias.append(linha.split(",")[1].replace("\n", ""))
-                print linha.split(",")[1].replace("\n", "")
 
         query_json = []
         
@@ -66,16 +65,12 @@ def tags_by_state_name(state_name):
 
         for linha in state_lines: 
             if(linha.split(",")[3].replace("\n", "") == state_name.replace("'","")):
-                #print linha.split(",")[3].replace("\n", ""), state_name.replace("'","")
                 artista_do_state.append(linha.split(",")[0])
         
-        print artista_do_state
 
         for linha in artist_lines:
-            #print linha.split(",")[0]
             if(linha.split(",")[0] in artista_do_state):
                 ocorrencias.append(linha.split(",")[1].replace("\n", ""))
-                #print linha.split(",")[3].replace("\n", "")
 
         query_json = []
         
@@ -126,15 +121,12 @@ def artist_id_by_state_location_csv(state):
         lines = arq.readlines()
         for line in lines:
             split_line = line.split(",")
-            print split_line[3].lower().replace("\n",""), ",", state.lower().replace("\n","")
             if (split_line[3].lower().replace("\n","") == state.lower().replace("\n","")):
                 tupl = {}
                 tupl["artist_id"] = split_line[0].replace("\n","")
                 tupl["state"] = split_line[3].lower().replace("\n","")
                 query_json.append(tupl)
 
-        print ">>> "
-        print query_json
         return json.dumps(query_json)
 
     except lite.Error, e:
@@ -143,7 +135,6 @@ def artist_id_by_state_location_csv(state):
 #enquanto o bd nao funciona, csv :)
 def tags_states():
     try:
-        print ">>> ", os.getcwd()
         arq = open("../database/csv/usa_artist_state_location.csv")
         state_tags = []
         
@@ -156,7 +147,6 @@ def tags_states():
             split_line = line.split(",")
             state = split_line[3]
 
-            print split_line[3].lower().replace("\n",""), ",", state.lower().replace("\n","")
             
             if (split_line[3].lower().replace("\n","") == state.lower().replace("\n","")):
                 tupl = {}
@@ -164,8 +154,6 @@ def tags_states():
                 tupl["state"] = split_line[3].lower().replace("\n","")
                 state_tags.append(tupl)
 
-        print ">>> "
-        print state_tags
         return json.dumps(state_tags)
 
     except lite.Error, e:
@@ -196,7 +184,6 @@ def state_location_by_artist_id(artist_id):
         #esta é a consulta que deve ser realizada quando o bd estiver funcionando
         #query = "SELECT id, state FROM usa_artist_state_locatio WHERE id =" + id + ";"
 
-        print query
         cursor.execute(query)
         rows = cursor.fetchall()
         cnxn.close()
@@ -222,7 +209,6 @@ def artist_id_by_state_location(state):
         #esta é a consulta que deve ser realizada quando o bd estiver funcionando
         #query = "SELECT id, state FROM usa_artist_gps_location WHERE state =" + state + ";"
         
-        print query
         cursor.execute(query)
         rows = cursor.fetchall()
         cnxn.close()
@@ -249,10 +235,36 @@ def get_state_main_tag():
     main_tag = {}
 
     for state in states:
-        req =requests.get('http://0.0.0.0:9090/tags_by_state?state='+state)
-        tags = req.json()
+        tags = json.loads(tags_by_state(state))
         if len(tags.values()) != 0:
             main = max(tags, key = tags.get)
             main_tag[state] = {"fillKey": str(main.strip()), "gender" :  str(main.strip())}
+
             
-    return main_tag
+    return json.dumps(main_tag)
+
+def timeseries():
+    a = open('../database/mainDados.csv', 'r')
+    b = a.readlines()
+    country = ['country', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    jazz = ['jazz', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    pop = ['pop', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    rock = ['rock', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    reggae = ['reggae', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    anos = [1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010]
+
+    for linha in b:
+        partes = linha.split(',')
+        if partes[1] == 'country':
+            country[int(partes[0])-1954]+=1
+        elif partes[1] == 'jazz':
+            jazz[int(partes[0])-1954]+=1
+        elif partes[1] == 'pop':
+            pop[int(partes[0])-1954]+=1
+        elif partes[1] == 'rock':
+            rock[int(partes[0])-1954]+=1
+        elif partes[1] == 'reggae':
+            reggae[int(partes[0])-1954]+=1
+
+    return json.dumps([country, jazz, pop, rock, reggae])
