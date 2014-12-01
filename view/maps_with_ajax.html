@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+
+    <script src="d3.min.js"></script>
+    <script src="topojson.js"></script>
+    <script src="datamaps.all.js"></script>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="c3.js"></script>
+    <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
+
+
+</head>
+<body>
+	<script>
+
+
+$.ajax({
+url : 'http://0.0.0.0:9090/maintag',
+dataType : 'json'
+}).fail(function(data2) {
+console.log('fail');
+}).done(function(data2) {
+
+var data3 = {};
+
+for (var key in data2) {
+  //console.log(key);
+  data3[key] = {'gender' : data2[key].gender, 'fillKey' : data2[key].fillKey};
+   //dic = {};
+   //row = data[i].$row;
+   //mtbf = data[i].MTBF;
+   //mttr = data[i].MTTR;
+   //fail = data[i].Failure;
+   //dic = {"$row": row, "MTBF": mtbf , "MTTR":mttr, "Failure": fail};
+   //data2[i] = dic
+
+}
+
+
+
+var election = new Datamap({
+  scope: 'usa',
+  element: document.getElementById('container'),
+  geographyConfig: {
+    highlightBorderColor: '#bada55',
+   popupTemplate: function(geography, data) {
+      return '<div class="hoverinfo">' + geography.properties.name + "'s main tag is: " +  data.gender + ' '
+    },
+    highlightBorderWidth: 3
+  },
+
+  fills: {
+  'classic pop and rock' : '#fee8c8',
+  'rock and indie' : '#fdd49e',
+  'alternative rock' : '#fdbb84',
+  'rock' : '#fc8d59', 
+  'post-grunge' : '#ef6548',
+  'industrial metal' : '#d7301f',
+  'metalcore' : '#b30000',
+  'sludge metal' : '#7f0000',
+  'usa' : '#74c476', 
+  'american' : '#41ab5d',
+  'new haven' : '#238b45',
+  'country' : '#dd3497',
+  'folk' : '#ae017e',
+  'jazz fusion' : '#EDDC4E',
+  'blues' : '#D7DF01',
+  'cajun' : '#306596',
+  'freestyle' : '#00FFFF',
+  'pop' : '#5F4C0B',
+  'soundtrack' : '#0B615E',
+  'No Data' : '#DDDDDD',    
+  defaultFill: '#DDDDDD'
+},
+data : data3
+
+
+});
+election.labels();
+election.legend();
+
+
+
+
+});
+
+//var data3 = {'WA': {'gender': 'alternative rock', 'fillKey': 'alternative rock'}, 'DE': {'gender': 'nao possui'}, 'WI': {'gender': 'sludge metal', 'fillKey': 'sludge metal'}, 'WV': {'gender': 'nao possui'}, 'HI': {'gender': 'nao possui'}, 'FL': {'gender': 'american', 'fillKey': 'american'}, 'WY': {'gender': 'nao possui'}, 'NH': {'gender': 'usa', 'fillKey': 'usa'}, 'NJ': {'gender': 'american', 'fillKey': 'american'}, 'NM': {'gender': 'nao possui'}, 'TX': {'gender': 'folk', 'fillKey': 'folk'}, 'LA': {'gender': 'cajun', 'fillKey': 'cajun'}, 'NC': {'gender': 'folk', 'fillKey': 'folk'}, 'ND': {'gender': 'pop', 'fillKey': 'pop'}, 'NE': {'gender': 'nao possui'}, 'TN': {'gender': 'american', 'fillKey': 'american'}, 'NY': {'gender': 'american', 'fillKey': 'american'}, 'PA': {'gender': 'jazz fusion', 'fillKey': 'jazz fusion'}, 'AK': {'gender': 'nao possui'}, 'NV': {'gender': 'classic pop and rock', 'fillKey': 'classic pop and rock'}, 'VA': {'gender': 'blues', 'fillKey': 'blues'}, 'CO': {'gender': 'united states', 'fillKey': 'united states'}, 'CA': {'gender': 'american', 'fillKey': 'american'}, 'AL': {'gender': 'industrial metal', 'fillKey': 'industrial metal'}, 'AR': {'gender': 'classic pop and rock', 'fillKey': 'classic pop and rock'}, 'VT': {'gender': 'nao possui'}, 'IL': {'gender': 'classic pop and rock', 'fillKey': 'classic pop and rock'}, 'GA': {'gender': 'classic pop and rock', 'fillKey': 'classic pop and rock'}, 'IN': {'gender': 'usa', 'fillKey': 'usa'}, 'IA': {'gender': 'new haven', 'fillKey': 'new haven'}, 'MA': {'gender': 'american', 'fillKey': 'american'}, 'AZ': {'gender': 'american', 'fillKey': 'american'}, 'ID': {'gender': 'nao possui'}, 'CT': {'gender': 'alternative rock', 'fillKey': 'alternative rock'}, 'ME': {'gender': 'nao possui'}, 'MD': {'gender': 'soundtrack', 'fillKey': 'soundtrack'}, 'OK': {'gender': 'country', 'fillKey': 'country'}, 'OH': {'gender': 'rock and indie', 'fillKey': 'rock and indie'}, 'UT': {'gender': 'nao possui'}, 'MO': {'gender': 'classic pop and rock', 'fillKey': 'classic pop and rock'}, 'MN': {'gender': 'freestyle', 'fillKey': 'freestyle'}, 'MI': {'gender': 'rock', 'fillKey': 'rock'}, 'RI': {'gender': 'nao possui'}, 'KS': {'gender': 'nao possui'}, 'MT': {'gender': 'nao possui'}, 'MS': {'gender': 'blues', 'fillKey': 'blues'}, 'SC': {'gender': 'metalcore', 'fillKey': 'metalcore'}, 'KY': {'gender': 'post-grunge', 'fillKey': 'post-grunge'}, 'OR': {'gender': 'nao possui'}, 'SD': {'gender': 'folk', 'fillKey': 'folk'}};
+
+//console.log(data3);
+
+//});
+//election.labels();
+//election.legend();
+
+</script>
+		
+	</script>
+</body>
+</html>

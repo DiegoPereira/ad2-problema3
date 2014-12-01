@@ -18,8 +18,8 @@ var election = new Datamap({
   element: document.getElementById('container'),
   geographyConfig: {
     highlightBorderColor: '#bada55',
-   popupTemplate: function(geography, data) {
-      return '<div class="hoverinfo">' + geography.properties.name + "'s main tag is: " +  data.gender + ' '
+   popupTemplate: function(geography, data2) {
+      return '<div class="hoverinfo">' + geography.properties.name + "'s main tag is: " +  data2.gender + ' '
     },
     highlightBorderWidth: 3
   },
