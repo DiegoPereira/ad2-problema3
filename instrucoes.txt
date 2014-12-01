@@ -1,0 +1,18 @@
+Dentro da pasta views há 4 visualizações em html(maps e therock com e sem requisicoes
+Ajax). 
+
+O maps responde a seguinte pergunta: "Qual tag é mais presente em cada estado estado 
+americano?" e as cores indicam uma certa proximidade entre os gêneros. Abaixo temos a
+legenda, onde seguido de cada tag tem a respectiva cor. De interatividade, temos que
+ao passar o mouse sobre cada estado, seja indicado o nome do estado e sua respectiva
+tag principal.
+
+O therock, é uma melhoria do gráfico do problema 2, que respondia se os gêneros tradi-
+cionais estavam morrendo, se estavam sendo lançados menos músicas destes gêneros com
+o passar dos anos. O eixo horizontal possui os anos, e no vertical temos a quantidade
+de musicas lançadas nesse ano. Sobre a interatividade, podemos selecionar cada gênero
+separadamente clicando neles abaixo do gráfico, podemos destacar uma linha pondo o 
+mouse sobre ela, podemos verificar informações das musicas lançadas em cada ano com
+o ponteiro do mouse sobre algum ponto do ano e também é possível dar zoom utilizando 
+o scroll.
+
